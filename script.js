@@ -1,4 +1,5 @@
 const vehicles = [
+  // Liste af forskellige køretøjer med information om type, brændstof, passagerer osv.
   {
     type: "Bus",
     fuel: "Diesel",
@@ -28,9 +29,11 @@ const vehicles = [
   { type: "Løbehjul", passengers: 1, isElectric: true },
 ];
 
+// Finder tabel-kroppen og knapper i HTML
 const tbodyPointer = document.querySelector("tbody");
 const buttons = document.querySelectorAll("button");
 
+// Funktion til at vise en liste af køretøjer i tabellen
 function showTheseVehicles(arr) {
   tbodyPointer.innerHTML = "";
   arr.forEach((each) => {
@@ -47,16 +50,18 @@ function showTheseVehicles(arr) {
   });
 }
 
+// Viser alle køretøjer ved start
 showTheseVehicles(vehicles);
 
+// Tilføjer klikfunktioner til knapperne, så de filtrerer køretøjerne
 buttons.forEach((button, index) => {
   button.onclick = function () {
     let filtered = vehicles.filter((v) => {
-      if (index === 0) return v.isElectric;
-      if (index === 1) return v.passengers > 2;
-      if (index === 2) return v.isElectric && v.ownedBy === "Jonas";
-      if (index === 3) return v.fuel === "Rugbrød" && v.passengers > 1;
-      return true;
+      if (index === 0) return v.isElectric; // Viser kun el-drevne køretøjer
+      if (index === 1) return v.passengers > 2; // Viser kun køretøjer med mere end 2 sæder
+      if (index === 2) return v.isElectric && v.ownedBy === "Jonas"; // El-drevne køretøjer ejet af Jonas
+      if (index === 3) return v.fuel === "Rugbrød" && v.passengers > 1; // Rugbrødsdrevne køretøjer med mere end én plads
+      return true; // Standard: viser alle køretøjer
     });
     showTheseVehicles(filtered);
   };
